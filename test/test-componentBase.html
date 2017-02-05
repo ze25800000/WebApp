@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../js/lib/jquery.js"></script>
+    <script src="../js/H5ComponentBase.js"></script>
+    <link rel="stylesheet" href="../css/H5ComponentBase.css">
+</head>
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        background-color: #000000;
+        font-size: 12px;
+    }
+
+    .iphone {
+        width: 340px;
+        height: 540px;
+        background-color: #ffffff;
+        margin: 100px auto;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+</style>
+<body>
+<div class="iphone">
+
+</div>
+<script>
+    var cfg = {
+        type: 'base',
+        text: 'text',
+        width: 514,
+        height: 306,
+        bg: 'imgs/p1_people.png',
+        css: {
+            left: 50
+        },
+        animateIn: {
+            bottom: 80,
+            opacity: 1
+        },
+        animateOut: {
+            bottom: 0,
+            opacity: 0
+        },
+        center: true
+    };
+    var h5 = new H5ComponentBase('pic', cfg);
+    $('.iphone').append(h5);
+</script>
+</body>
+</html>

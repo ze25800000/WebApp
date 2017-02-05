@@ -1,0 +1,56 @@
+.H5_component {
+    background-size: 100%;
+    background-repeat: no-repeat;
+    position: absolute;
+}
+
+.h5_component_bar .line {
+    margin-bottom: 15px;
+}
+
+.h5_component_bar .line .name {
+    width: 61px;
+    display: inline-block;
+    vertical-align: top;
+    margin-right: 5px;
+}
+
+.h5_component_bar .line .rate {
+    height: 15px;
+    display: inline-block;
+    vertical-align: top;
+    position: relative;
+    margin-right: 5px;
+}
+
+.h5_component_bar .line .bg {
+    transition: all 1s 1s;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 0;
+    height: 100%;
+    background-color: #99c0ff;
+    border-radius: 3px;
+}
+
+.h5_component_bar .line .per {
+    opacity: 0;
+    display: inline-block;
+    vertical-align: top;
+    transition: all 1s 2s;
+}
+
+.h5_component_bar_load .rate .bg {
+    width: 100%;
+}
+.h5_component_bar_load .line .per {
+    opacity: 1;
+}
+.h5_component_bar_leave .line .per {
+    opacity: 0;
+}
+
+.h5_component_bar_leave .rate .bg {
+    width: 0;
+}

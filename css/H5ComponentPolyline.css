@@ -1,0 +1,34 @@
+/*折线图*/
+.H5_component {
+    background-size: 100%;
+    background-repeat: no-repeat;
+    position: absolute;
+}
+
+.h5_component_polyline canvas {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.h5_component_polyline .text {
+    position: absolute;
+    text-align: center;
+    font-size: 12px;
+    bottom: -20px;
+    height: 20px;
+    line-height: 20px;
+    transform: scale(.8);
+    opacity: 0;
+    transition: all 1s 2s;
+}
+
+.h5_component_polyline_leave .text {
+    opacity: 0;
+}
+
+.h5_component_polyline_load .text {
+    opacity: 1;
+}
