@@ -1,9 +1,4 @@
 /*折线图*/
-.H5_component {
-    background-size: 100%;
-    background-repeat: no-repeat;
-    position: absolute;
-}
 
 .h5_component_polyline canvas {
     width: 100%;

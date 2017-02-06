@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1">
+  <title>IT教育网</title>
+  <!--载入所有组件资源-->
+  <script src="js/lib/jquery.js"></script>
+  <script src="js/lib/jquery.fullPage.js"></script>
+  <!--载入H5组件相关资源-->
+  <script>
+    var res = ['Base', 'Bar', 'Bar_v', 'Point', 'polyline', 'Radar', 'Pie', 'Ring'];
+    var html = [];
+    for (s in res) {
+      html.push('\<script src="js/H5Component' + res[s] + '.js"><\/script>');
+      html.push('<link rel="stylesheet" href="css/H5Component' + res[s] + '.css">');
+    }
+    document.write(html.join(''));
+  </script>
+
+  <!--加载H5对象进行内容管理-->
+  <link rel="stylesheet" href="css/h5.css">
+  <script src="js/h5.js"></script>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+    }
+
+    .H5_page_face {
+      background-image: url('imgs/face_bg.png');
+    }
+
+    .h5_component_name_slogan {
+      animation: rock 2s infinite 2s;
+    }
+
+    @keyframes rock {
+      0% {
+        transform: rotate(0deg)
+      }
+      5% {
+        transform: rotate(3deg)
+      }
+      10% {
+        transform: rotate(-4deg)
+      }
+      15% {
+        transform: rotate(3deg)
+      }
+      20% {
+        transform: rotate(-2deg)
+      }
+      25% {
+        transform: rotate(1deg)
+      }
+      30% {
+        transform: rotate(-1deg)
+      }
+      70% {
+        transform: rotate(0deg)
+      }
+      100% {
+        transform: rotate(0deg)
+      }
+    }
+  </style>
+</head>
+<body>
+
+<script>
+  $(function () {
+    var H5 = new h5();
+    H5
+      .addPage('face')
+      .addComponent('logo', {
+        center: true,
+        width: 395,
+        height: 130,
+        bg: 'imgs/face_logo.png',
+        css: {opacity: 0},
+        animateIn: {top: 100, opacity: 1},
+        animateOut: {top: 0, opacity: 0}
+      })
+      .addComponent('slogan', {
+        center: true,
+        width: 365,
+        height: 99,
+        bg: 'imgs/face_slogan.png',
+        css: {opacity: 0, top: 180},
+        animateIn: {left: '50%', opacity: 1},
+        animateOut: {left: '0%', opacity: 0},
+        delay: 500
+      })
+      .addComponent('face_img_left', {
+        width: 370,
+        height: 493,
+        bg: 'imgs/face_img_left.png',
+        css: {opacity: 0, left: -50, bottom: -50},
+        animateIn: {opacity: 1, left: 0, bottom: 0},
+        animateOut: {opacity: 0, left: -50, bottom: -50},
+        delay: 1000
+      })
+      .addComponent('face_img_left', {
+        width: 276,
+        height: 449,
+        bg: 'imgs/face_img_right.png',
+        css: {opacity: 0, right: -50, bottom: -50},
+        animateIn: {opacity: 1, right: 0, bottom: 0},
+        animateOut: {opacity: 0, right: -50, bottom: -50},
+        delay: 1000
+      })
+      .addPage('face')
+      .loader();
+  });
+</script>
+</body>
+</html>

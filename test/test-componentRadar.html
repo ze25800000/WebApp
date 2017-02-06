@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="../js/lib/jquery.js"></script>
+  <script src="../js/H5ComponentBase.js"></script>
+  <link rel="stylesheet" href="../css/H5ComponentBase.css">
+
+  <link rel="stylesheet" href="../css/H5ComponentRadar.css">
+  <script src="../js/H5ComponentRadar.js"></script>
+
+
+</head>
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+    background-color: #000000;
+    font-size: 12px;
+  }
+
+  .iphone {
+    width: 340px;
+    height: 540px;
+    background-color: #ffffff;
+    margin: 100px auto;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+</style>
+<body>
+<div class="iphone">
+
+</div>
+<script>
+  var cfg = {
+    type: 'radar',
+    width: 400,
+    height: 400,
+    data: [
+      ['JavaScript', 0.8, '#ff7676'],
+      ['HTML/CSS', 0.9],
+      ['Bootstrap', 0.3],
+      ['JQuery', 0.6],
+      ['Vue', 0.8],
+    ],
+    css: {
+      top: 200,
+            opacity: 0
+    },
+    animateIn: {
+      top: 200,
+      opacity: 1
+    },
+    animateOut: {
+      top: -200,
+      opacity: 0
+    },
+    center: true
+  };
+  var h5 = new H5ComponentRadar('radar', cfg);
+  $('.iphone').append(h5);
+  var leave = true;
+  $('body').click(function () {
+    leave = !leave;
+    $('.H5_component').trigger(leave ? 'onLeave' : 'onLoad');
+  });
+</script>
+</body>
+</html>
