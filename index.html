@@ -7,24 +7,22 @@
   <!--载入所有组件资源-->
   <script src="js/lib/jquery.js"></script>
   <script src="js/lib/jquery.fullPage.js"></script>
-  <!--载入H5组件相关资源-->
-  <script>
-    var res = ['Base', 'Bar', 'Bar_v', 'Point', 'polyline', 'Radar', 'Pie', 'Ring'];
-    var html = [];
-    for (s in res) {
-      html.push('\<script src="js/H5Component' + res[s] + '.js"><\/script>');
-      html.push('<link rel="stylesheet" href="css/H5Component' + res[s] + '.css">');
-    }
-    document.write(html.join(''));
-  </script>
 
   <!--加载H5对象进行内容管理-->
   <link rel="stylesheet" href="css/h5.css">
   <script src="js/h5.js"></script>
+
+  <link rel="stylesheet" href="css/H5_loading.css">
+  <script src="js/H5_loading.js"></script>
+
   <style>
     body {
       margin: 0;
       padding: 0;
+    }
+
+    .H5_page {
+      background-image: url('imgs/page_bg.png');
     }
 
     .H5_page_face {
@@ -33,6 +31,27 @@
 
     .h5_component_name_slogan {
       animation: rock 2s infinite 2s;
+    }
+
+    .h5_component_name_caption {
+      background-image: url('imgs/page_caption_bg.png');
+      width: 283px;
+      height: 160px;
+      text-align: center;
+      font-size: 20px;
+      color: #ffffff;
+      line-height: 140px;
+    }
+
+    .h5_component_name_back {
+      animation: back 2s infinite 2s;
+      top: 30px;
+    }
+
+    @keyframes back {
+      50% {
+        top: 20px
+      }
     }
 
     @keyframes rock {
@@ -65,12 +84,39 @@
       }
     }
   </style>
+
 </head>
 <body>
+
+<div class="loading">
+  <div class="double-bounce1"></div>
+  <div class="double-bounce2"></div>
+  <div id="rate">0%</div>
+</div>
+
+<!--载入H5组件相关资源-->
+<script>
+  var res = ['Base', 'Bar', 'Bar_v', 'Point', 'polyline', 'Radar', 'Pie', 'Ring'];
+  var html = [];
+  for (s in res) {
+    html.push('\<script src="js/H5Component' + res[s] + '.js"><\/script>');
+    html.push('<link rel="stylesheet" href="css/H5Component' + res[s] + '.css">');
+  }
+  document.write(html.join(''));
+</script>
 
 <script>
   $(function () {
     var H5 = new h5();
+    H5.whenAddPage = function () {
+      this.addComponent('slide_up', {
+        bg: 'imgs/footer.png',
+        css: {opacity: 0, left: 0, bottom: -20, width: '100%', height: '20px', zIndex: 999},
+        animateIn: {opacity: 1, bottom: '-1px'},
+        animateOut: {opacity: 0, bottom: '-20px'},
+        delay: 500
+      });
+    };
     H5
       .addPage('face')
       .addComponent('logo', {
@@ -110,8 +156,298 @@
         animateOut: {opacity: 0, right: -50, bottom: -50},
         delay: 1000
       })
-      .addPage('face')
-      .loader();
+
+      .addPage()
+      .addComponent('caption', {text: '核心理念'})
+      .addComponent('text', {
+        width: 500,
+        height: 30,
+        center: true,
+        text: 'IT教育网=只学有用的',
+        css: {opacity: 0, textAlign: 'center', color: 'red', fontSize: '26px'},
+        animateIn: {opacity: 1, top: 160},
+        animateOut: {opacity: 0, top: 240}
+      })
+      .addComponent('description', {
+        center: true,
+        width: 481,
+        height: 295,
+        bg: 'imgs/description_bg.gif',
+        css: {
+          opacity: 0,
+          padding: '15px 10px 10px 10px',
+          color: '#fff',
+          fontSize: '15px',
+          lineHeight: '18px',
+          textAlign: 'justify',
+          top: 280
+        },
+        text: '2013年，IT教育网的诞生引领中国IT职业从教育进入新时代；高质量实战课程、全新教学模式、实时互动学习，以领先优势打造行业品牌；迄今为止，IT教育网已成为中国规模最大、互动性最高的IT技能学习平台。',
+        animateIn: {opacity: 1, top: 210},
+        animateOut: {opacity: 0, top: 280},
+        delay: 1000
+      })
+      .addComponent('people', {
+        center: true,
+        width: 515,
+        height: 305,
+        bg: 'imgs/p1_people.png',
+        css: {
+          opacity: 0,
+          bottom: 0
+        },
+        animateIn: {opacity: 1, bottom: 40},
+        animateOut: {opacity: 0, bottom: 0},
+        delay: 500
+      })
+
+      .addPage()
+      .addComponent('caption', {text: '课程分布方向'}) //polyline
+      .addComponent('msg', {
+        text: '前端开发课程占到40%',
+        css: {
+          opacity: 0,
+          top: 140,
+          textAlign: 'center',
+          width: '100%',
+          color: '#ff7676'
+        },
+        animateIn: {opacity: 1},
+        animateOut: {opacity: 0},
+        delay: 500
+      })
+      .addComponent('polyline', {
+        type: 'polyline',
+        width: 500,
+        height: 440,
+        data: [
+          ['JavaScript', 0.4, '#ff7676'],
+          ['HTML/CSS', 0.3],
+          ['JQuery', 0.1],
+          ['Vue', 0.5],
+        ],
+        css: {
+          top: -200,
+          opacity: 0
+        },
+        animateIn: {
+          top: 200,
+          opacity: 1
+        },
+        animateOut: {
+          top: -200,
+          opacity: 0
+        },
+        center: true,
+      })
+
+      .addPage()
+      .addComponent('caption', {text: '移动开发课程'}) //pie
+      .addComponent('msg', {
+        text: '移动课程JavaScript占到40%',
+        css: {
+          opacity: 0,
+          top: 140,
+          textAlign: 'center',
+          width: '100%',
+          color: '#ff7676'
+        },
+        animateIn: {opacity: 1},
+        animateOut: {opacity: 0},
+        delay: 500
+      })
+      .addComponent('pie', {
+        type: 'pie',
+        width: 400,
+        height: 400,
+        data: [
+          ['JavaScript', 0.4, '#ff7676'],
+          ['HTML/CSS', 0.2],
+          ['Bootstrap', 0.05],
+          ['JQuery', 0.2],
+          ['Vue', 0.15],
+        ],
+        css: {
+          top: 200,
+          opacity: 0
+        },
+        animateIn: {
+          top: 200,
+          opacity: 1
+        },
+        animateOut: {
+          top: -200,
+          opacity: 0
+        },
+        center: true
+      })
+
+      .addPage()
+      .addComponent('caption', {text: '前端开发课程'}) //bar
+      .addComponent('msg', {
+        text: '前端课程JavaScript占到40%',
+        css: {
+          opacity: 0,
+          top: 140,
+          textAlign: 'center',
+          width: '100%',
+          color: '#ff7676'
+        },
+        animateIn: {opacity: 1},
+        animateOut: {opacity: 0},
+        delay: 500
+      })
+      .addComponent('bar', {
+        type: 'bar',
+        width: 500,
+        height: 540,
+        data: [
+          ['JavaScript', 0.4, '#ff7676'],
+          ['HTML/CSS', 0.35],
+          ['JQuery', 0.25],
+          ['Vue', 0.21],
+          ['node', 0.22]
+        ],
+        css: {
+          top: -200,
+          opacity: 0
+        },
+        animateIn: {
+          top: 200,
+          opacity: 1
+        },
+        animateOut: {
+          top: -200,
+          opacity: 0
+        },
+        center: true,
+        delay: 1000
+      })
+
+      .addPage()
+      .addComponent('caption', {text: '后端开发课程'}) //radar
+      .addComponent('msg', {
+        text: '前端课程JavaScript占到40%',
+        css: {
+          opacity: 0,
+          top: 140,
+          textAlign: 'center',
+          width: '100%',
+          color: '#ff7676'
+        },
+        animateIn: {opacity: 1},
+        animateOut: {opacity: 0},
+        delay: 500
+      })
+      .addComponent('radar', {
+        type: 'radar',
+        width: 400,
+        height: 400,
+        data: [
+          ['JavaScript', 0.8, '#ff7676'],
+          ['HTML/CSS', 0.9],
+          ['Bootstrap', 0.3],
+          ['JQuery', 0.6],
+          ['Vue', 0.8],
+        ],
+        css: {
+          top: 200,
+          opacity: 0
+        },
+        animateIn: {
+          top: 200,
+          opacity: 1
+        },
+        animateOut: {
+          top: -200,
+          opacity: 0
+        },
+        center: true
+      })
+
+      .addPage()
+      .addComponent('caption', {text: '课程难度分布'}) //point
+      .addComponent('msg', {
+        text: '前端课程JavaScript占到40%',
+        css: {
+          opacity: 0,
+          top: 140,
+          textAlign: 'center',
+          width: '100%',
+          color: '#ff7676'
+        },
+        animateIn: {opacity: 1},
+        animateOut: {opacity: 0},
+        delay: 500
+      })
+      .addComponent('point', {
+        type: 'point',
+        width: 200,
+        height: 200,
+        data: [
+          ['A项', 0.4, 'yellow'],
+          ['B项', 0.2, 'blue', 0, '-60%'],
+          ['C项', 0.25, 'green', 0, '120%'],
+        ],
+        css: {
+          bottom: 0,
+          opacity: 0
+        },
+        animateIn: {
+          bottom: '30%',
+          opacity: 1
+        },
+        animateOut: {
+          bottom: 0,
+          opacity: 0
+        },
+        center: true
+      })
+
+      .addPage('tall')
+      .addComponent('logo', {
+        center: true,
+        width: 359,
+        height: 129,
+        bg: 'imgs/tail_logo.png',
+        css: {top: 210, opacity: 0},
+        animateIn: {opacity: 1, top: 210},
+        animateOut: {opacity: 0, top: 240}
+      })
+      .addComponent('slogan', {
+        center: true,
+        width: 314,
+        height: 446,
+        bg: 'imgs/tail_slogan.png',
+        css: {top: 280, opacity: 0},
+        animateIn: {opacity: 1, left: '50%'},
+        animateOut: {opacity: 0, left: 0},
+        delay: 500
+      })
+      .addComponent('share', {
+        width: 128,
+        height: 120,
+        bg: 'imgs/tail_share.png',
+        css: {top: 110, right: 110, opacity: 0},
+        animateIn: {opacity: 1, top: 10, right: 10},
+        animateOut: {opacity: 0, top: 110, right: 110},
+        delay: 1000
+      })
+      .addComponent('back', {
+        width: 52,
+        height: 50,
+        bg: 'imgs/tail_back.png',
+        center: true,
+        css: {top: 110, right: 110, opacity: 0},
+        animateIn: {opacity: 1, top: 10, right: 10},
+        animateOut: {opacity: 0, top: 110, right: 110},
+        delay: 1000,
+        onclick: function () {
+          $.fn.fullpage.moveTo(1);
+        }
+      })
+
+      .loader(['imgs/description_bg.gif', 'imgs/face_bg.png', 'imgs/face_img_left.png', 'imgs/face_img_right.png', 'imgs/face_logo.png', 'imgs/face_slogan.png', 'imgs/footer.png', 'imgs/p1_people.png', 'imgs/page_bg.png', 'imgs/page_caption_bg.png', 'imgs/tail_logo.png', 'imgs/tail_share.png', 'imgs/tail_slogan.png'], 1);
   });
 </script>
 </body>
